@@ -6,9 +6,7 @@ const penButton = document.querySelector(".pen");
 const eraserButton = document.querySelector(".eraser");
 const clearButton = document.querySelector(".clear");
 
-let randomRed = Math.floor(Math.random()*257);
-let randomBlue = Math.floor(Math.random()*257);
-let randomGreen = Math.floor(Math.random()*257);
+
 
 //clearButton.onclick = () => {cell.style.backgroundColor = "none"};
 //eraserButton.addEventListener("click", eraseColor, false);
@@ -60,6 +58,9 @@ function changeColor (e) {
 }
 
 function changeRainbowColor (e) {
+    let randomRed = Math.floor(Math.random()*257);
+    let randomBlue = Math.floor(Math.random()*257);
+    let randomGreen = Math.floor(Math.random()*257);
     if (e.type === 'mouseover' && !mouseDown) return;
     e.target.style.backgroundColor = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
 }
