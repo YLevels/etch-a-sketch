@@ -1,8 +1,9 @@
 const gridContainer = document.querySelector(".grid-container");
-var slider = document.querySelector(".slider");
+const slider = document.querySelector(".slider");
 var output = document.querySelector(".size");
 
 let cell = document.createElement("div");
+let generatedCell = document.querySelectorAll(".cell");
 
 let size = 16;
 output.innerHTML = "16x16";
@@ -21,6 +22,7 @@ function makeGrid (size) {
         cell.style.borderStyle = "solid";
         cell.style.borderColor = "black";
         cell.style.borderWidth = "thin";
+        cell.addEventListener("mousedown", changeColor);
         gridContainer.appendChild(cell);
     }
 }
@@ -29,7 +31,10 @@ function removeGrid () {
     gridContainer.style.gridTemplateColumns = "none";
     gridContainer.style.gridTemplateRows = "none";
     gridContainer.innerHTML = "";
+}
 
+function changeColor (e) {
+    e.target.style.backgroundColor = "black";
 }
 
 makeGrid(16);
