@@ -9,9 +9,13 @@ output.innerHTML = "16x16";
 
 slider.oninput = function () {
     output.innerHTML = `${this.value + "x" + this.value}`;
+    removeGrid();
+    makeGrid(this.value);
 }
 
-function makeDefaultGrid (size) {
+function makeGrid (size) {
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
     for (i=1; i<=size*size; i++) {
         cell = document.createElement("div");
         cell.style.borderStyle = "solid";
@@ -21,4 +25,11 @@ function makeDefaultGrid (size) {
     }
 }
 
-makeDefaultGrid(16);
+function removeGrid () {
+    gridContainer.style.gridTemplateColumns = "none";
+    gridContainer.style.gridTemplateRows = "none";
+    gridContainer.innerHTML = "";
+
+}
+
+makeGrid(16);

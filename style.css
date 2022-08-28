@@ -12,8 +12,7 @@ body {
     width: 500px;
     border-color: black;
     border-style: solid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+
 }
 
 .slider {
