@@ -12,7 +12,10 @@ body {
     width: 500px;
     border-color: black;
     border-style: solid;
+}
 
+.no-grid{
+    border-color: none;
 }
 
 .slider {
