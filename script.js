@@ -8,6 +8,10 @@ let generatedCell = document.querySelectorAll(".cell");
 let size = 16;
 output.innerHTML = "16x16";
 
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
 slider.oninput = function () {
     output.innerHTML = `${this.value + "x" + this.value}`;
     removeGrid();
@@ -22,6 +26,7 @@ function makeGrid (size) {
         cell.style.borderStyle = "solid";
         cell.style.borderColor = "black";
         cell.style.borderWidth = "thin";
+        cell.addEventListener("mouseover", changeColor);
         cell.addEventListener("mousedown", changeColor);
         gridContainer.appendChild(cell);
     }
@@ -34,6 +39,7 @@ function removeGrid () {
 }
 
 function changeColor (e) {
+    if (e.type === 'mouseover' && !mouseDown) return;
     e.target.style.backgroundColor = "black";
 }
 
