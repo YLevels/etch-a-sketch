@@ -1,20 +1,21 @@
 const gridContainer = document.querySelector(".grid-container");
 const slider = document.querySelector(".slider");
-var output = document.querySelector(".size");
+let output = document.querySelector(".size");
 const hideGridButton = document.querySelector(".hide-grid");
 const penButton = document.querySelector(".pen");
+const rainbowButton = document.querySelector(".rainbow");
 const eraserButton = document.querySelector(".eraser");
 const clearButton = document.querySelector(".clear");
 
-
-
-//clearButton.onclick = () => {cell.style.backgroundColor = "none"};
-//eraserButton.addEventListener("click", eraseColor, false);
-//eraserButton.onclick = () => eraseColor();
-
-// hideGridButton.addEventListener("click", () => {
-//     cell.style.borderColor="none";
-// })
+penButton.addEventListener("click", () => {
+    currentColor = "black";
+})
+rainbowButton.addEventListener("click", () => {
+    currentColor = "rainbow";
+})
+eraserButton.addEventListener("click", () => {
+    currentColor = "eraser";
+})
 
 let cell = document.createElement("div");
 let generatedCell = document.querySelectorAll(".cell");
@@ -25,6 +26,9 @@ output.innerHTML = "16x16";
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
+
+let currentMode = "pen";
+let currentColor = "black";
 
 slider.oninput = function () {
     output.innerHTML = `${this.value + "x" + this.value}`;
@@ -40,8 +44,8 @@ function makeGrid (size) {
         cell.style.borderStyle = "solid";
         cell.style.borderColor = "black";
         cell.style.borderWidth = "thin";
-        cell.addEventListener("mouseover", changeRainbowColor);
-        cell.addEventListener("mousedown", changeRainbowColor);
+        cell.addEventListener("mouseover", setColor);
+        cell.addEventListener("mousedown", setColor);
         gridContainer.appendChild(cell);
     }
 }
@@ -52,23 +56,20 @@ function removeGrid () {
     gridContainer.innerHTML = "";
 }
 
-function changeColor (e) {
+function setColor (e) {
     if (e.type === 'mouseover' && !mouseDown) return;
-    e.target.style.backgroundColor = "black";
+    if (currentColor === "rainbow") {
+        let randomRed = Math.floor(Math.random()*257);
+        let randomBlue = Math.floor(Math.random()*257);
+        let randomGreen = Math.floor(Math.random()*257);
+        e.target.style.backgroundColor = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
+    }
+    else if (currentColor === "eraser") {
+        e.target.style.backgroundColor = "lightgray";
+    }
+    else if (currentColor === "black") {
+    e.target.style.backgroundColor = currentColor;
+    }
 }
-
-function changeRainbowColor (e) {
-    let randomRed = Math.floor(Math.random()*257);
-    let randomBlue = Math.floor(Math.random()*257);
-    let randomGreen = Math.floor(Math.random()*257);
-    if (e.type === 'mouseover' && !mouseDown) return;
-    e.target.style.backgroundColor = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
-}
-
-// function eraseColor (e) {
-//     if (e.type === 'mouseover' && !mouseDown) return;
-//     e.target.style.backgroundColor = "inherit";
-// }
 
 makeGrid(16);
-//window.onload(makeGrid(16));

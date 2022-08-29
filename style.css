@@ -42,3 +42,8 @@ button {
     background-color: inherit;
 }
 
+button .clicked {
+    background-color: lightslategray;
+    
+}
+
