@@ -9,13 +9,37 @@ const clearButton = document.querySelector(".clear");
 
 penButton.addEventListener("click", () => {
     currentColor = "black";
+    turnButtonOn(penButton);
+    //penButton.classList.toggle("clicked");
 })
 rainbowButton.addEventListener("click", () => {
     currentColor = "rainbow";
+    turnButtonOn(rainbowButton);
+    //rainbowButton.classList.toggle("clicked");
 })
 eraserButton.addEventListener("click", () => {
     currentColor = "eraser";
+    turnButtonOn(eraserButton);
+    //eraserButton.classList.toggle("clicked");
 })
+
+function turnButtonOn (button) {
+    if (button === penButton) {
+        penButton.classList.add("clicked");
+        rainbowButton.classList.remove("clicked");
+        eraserButton.classList.remove("clicked");
+    }
+    else if (button === rainbowButton) {
+        rainbowButton.classList.add("clicked");
+        penButton.classList.remove("clicked");
+        eraserButton.classList.remove("clicked");
+    }
+    else if (button === eraserButton) {
+        eraserButton.classList.add("clicked");
+        rainbowButton.classList.remove("clicked");
+        penButton.classList.remove("clicked");
+    }
+}
 
 let cell = document.createElement("div");
 let generatedCell = document.querySelectorAll(".cell");
@@ -73,3 +97,4 @@ function setColor (e) {
 }
 
 makeGrid(16);
+penButton.classList.add("clicked");
